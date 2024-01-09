@@ -1,31 +1,76 @@
 package fr.istic.vv;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 public class Sorting {
 
     public static <T>  T[] bubblesort(T[] array, Comparator<T> comparator) {
         int n = array.length;
 
+        T[] arrayCopy = (T[]) new Object[n];
+        System.arraycopy(array,0, arrayCopy,0, n);
+
         boolean swapped = false;
         do {
             for(int i=1; i<n-1;i++){
-                if(comparator.compare(array[i-1], array[i]) > 0){
-                    T tmp = array[i-1];
-                    array[i-1] = array[i];
-                    array[i] = tmp;
+                if(comparator.compare(arrayCopy[i-1], arrayCopy[i]) > 0){
+                    T tmp = arrayCopy[i-1];
+                    arrayCopy[i-1] = arrayCopy[i];
+                    arrayCopy[i] = tmp;
                     swapped = true;
                 }
             }
         } while(swapped);
 
-        return array;
+        return arrayCopy;
     }
 
     public static <T> T[] quicksort(T[] array, Comparator<T> comparator)  {
-        //TODO
-        return null;
+        if(array.length <= 1){
+            return array;
+        }
+
+        int n = array.length;
+
+        T[] arrayCopy = (T[]) new Object[n];
+        System.arraycopy(array,0, arrayCopy,0, n);
+
+        quickSortHelper(arrayCopy,0,n-1,comparator);
+
+        return arrayCopy;
+    }
+
+    private static <T> void quickSortHelper(T[] array, int low, int high, Comparator<T> comparator){
+        if(low < high){
+            int pivot = partition(array,low,high,comparator);
+
+            quickSortHelper(array, low, pivot-1, comparator);
+            quickSortHelper(array, pivot+1, high, comparator);
+        }
+    }
+
+    private static <T> int partition(T[] array, int low, int high, Comparator<T> comparator) {
+        T pivot = array[high];
+
+        //temporary pivot index
+        int indexPivot = low-1;
+
+        for(int j=low; j<high; j++){
+            if(comparator.compare(array[j],pivot)<=0){
+                indexPivot++;
+
+                //swap indexPivot and j
+                T temp = array[indexPivot];
+                array[indexPivot] = array[j];
+                array[j] = temp;
+            }
+        }
+        indexPivot++;
+        //swap indexPivot and high
+        T temp = array[indexPivot];
+        array[indexPivot] = array[high];
+        array[high] = temp;
+
+        return indexPivot;
     }
 
     public static <T> T[] mergesort(T[] array, Comparator<T> comparator) {
