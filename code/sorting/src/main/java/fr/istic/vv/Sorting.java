@@ -9,9 +9,10 @@ public class Sorting {
         T[] arrayCopy = (T[]) new Object[n];
         System.arraycopy(array,0, arrayCopy,0, n);
 
-        boolean swapped = false;
+        boolean swapped;
         do {
-            for(int i=1; i<n-1;i++){
+            swapped = false;
+            for(int i=1; i<n;i++){
                 if(comparator.compare(arrayCopy[i-1], arrayCopy[i]) > 0){
                     T tmp = arrayCopy[i-1];
                     arrayCopy[i-1] = arrayCopy[i];

@@ -10,6 +10,18 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class SortingTest {
     @Property
+    void testAllSort(@ForAll @Size(min=1, max=100) Integer[] array) {
+        Comparator<Integer> comparator = Integer::compare;
+
+        Integer[] originalArray = Arrays.copyOf(array, array.length);
+        Arrays.sort(originalArray, comparator);
+
+        assertArrayEquals(originalArray, Sorting.quicksort(array,comparator));
+        assertArrayEquals(originalArray, Sorting.mergesort(array,comparator));
+        assertArrayEquals(originalArray, Sorting.bubblesort(array,comparator));
+    }
+
+    @Property
     void testBubbleSort(@ForAll @Size(min=1, max=100) Integer[] array) {
         Comparator<Integer> comparator = Integer::compare;
 
