@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class SortingTest {
     @Property
-    void testAllSort(@ForAll @Size(min=1, max=100) Integer[] array) {
+    void testAllSort(@ForAll @Size(min=1) Integer[] array) {
         Comparator<Integer> comparator = Integer::compare;
 
         Integer[] originalArray = Arrays.copyOf(array, array.length);
@@ -22,7 +22,7 @@ public class SortingTest {
     }
 
     @Property
-    void testBubbleSort(@ForAll @Size(min=1, max=100) Integer[] array) {
+    void testBubbleSort(@ForAll @Size(min=1) Integer[] array) {
         Comparator<Integer> comparator = Integer::compare;
 
         Integer[] originalArray = Arrays.copyOf(array, array.length);
@@ -32,7 +32,7 @@ public class SortingTest {
     }
 
     @Property
-    void testMergeSort(@ForAll @Size(min=1, max=100) Integer[] array) {
+    void testMergeSort(@ForAll @Size(min=1) Integer[] array) {
         Comparator<Integer> comparator = Integer::compare;
 
         Integer[] originalArray = Arrays.copyOf(array, array.length);
@@ -42,7 +42,7 @@ public class SortingTest {
     }
 
     @Property
-    void testQuickSort(@ForAll @Size(min=1, max=100) Integer[] array) {
+    void testQuickSort(@ForAll @Size(min=1) Integer[] array) {
         Comparator<Integer> comparator = Integer::compare;
 
         Integer[] originalArray = Arrays.copyOf(array, array.length);
