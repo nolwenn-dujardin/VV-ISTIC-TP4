@@ -27,12 +27,16 @@ public class BinaryHeap<T> {
         }
 
         T minElement = heap.get(0);
-        T lastElement = heap.remove(heap.size()-1);
 
-        heap.set(0,lastElement);
+        if(heap.size()>1){
+            T lastElement = heap.remove(heap.size()-1);
 
-        fixHeapDown(0);
-
+            heap.set(0,lastElement);
+            fixHeapDown(0);
+        }
+        else{
+            heap.clear();
+        }
         return minElement;
     }
 
